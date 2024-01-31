@@ -25,12 +25,12 @@ async def add_process_time_header(request: Request, call_next):
     if request.method in ["POST", "PUT", "PATCH","HEAD"]:
         if data or request.query_params:
             
-            return Response("{}",status_code=400)
+            return Response(status_code=400)
         else:
-            return Response("{}",status_code=405)
+            return Response(status_code=405)
     else:
         if data or request.query_params:
-            return Response("{}",status_code=400)
+            return Response(status_code=400)
 
     response = await call_next(request)
     return response
@@ -47,10 +47,11 @@ def fetch_data() -> JSONResponse:
         engine.connect()
         print(f"DB Connected Successfuly")
     except Exception as e:
-        return Response("{}", status_code=503)
+        return Response(status_code=503)
     #HTTPException(status_code=500, detail=str(e))
     
-    return JSONResponse(content={},headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
+    return Response(status_code=200,headers={"Cache-Control": "no-cache, no-store, must-revalidate","content-type":"application/json"})
+    #return JSONResponse(content='' ,headers={"Cache-Control": "no-cache, no-store, must-revalidate","content-type":"json"})
 
 
 
