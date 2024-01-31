@@ -36,8 +36,6 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-
-from sqlalchemy import create_engine, exc
 #Endpoint function to check request body.
 @app.get("/healthz")
 def fetch_data() -> JSONResponse:
@@ -52,26 +50,8 @@ def fetch_data() -> JSONResponse:
         return Response("{}", status_code=503)
     #HTTPException(status_code=500, detail=str(e))
     
-    return JSONResponse(content={},headers={"Cache-Control": "no-cache, no-store, must-revalidate'"})
+    return JSONResponse(content={},headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
 
 
 
 
-
-"""
-+v
-1. All words
-
-
--v
-1. host is not  reachable means ip / locahost is not working [x]
-2. port is incorrect [x]
-3. user doesnot exist [x]
-4. user password is in correct [x]
-5. Change the method
-6. change the method with json payload
-
---
-
-Add header in response no-cache the [x]
-"""
