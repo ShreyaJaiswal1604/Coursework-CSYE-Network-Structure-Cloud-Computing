@@ -22,7 +22,7 @@ async def add_process_time_header(request: Request, call_next):
 
     
     data = await request.body()
-    if request.method in ["POST", "PUT", "PATCH","HEAD"]:
+    if request.method not in ["GET"]:
         if data or request.query_params:
             
             return Response(status_code=400)
