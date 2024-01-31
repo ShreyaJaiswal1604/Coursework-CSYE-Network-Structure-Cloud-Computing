@@ -25,6 +25,11 @@ python3 -m venv henv
 source henv/bin/activate
 ```
 
+## Add all requirement
+```bash
+pip install -r requirements.txt
+```
+
 ## Install packages in the Virtual Env
 ```bash
 pip install Flask SQLAlchemy
@@ -45,7 +50,9 @@ docker-compose up
 ```bash
 docker-compose down
 ```
-
+## Run the python application
+```bash
+uvicorn app:app --reload```
 
 ---
 

@@ -10,6 +10,7 @@ load_dotenv()
 
 DB_CONN = os.getenv('DB_CONN')
 
+
 app = FastAPI()
 
 @app.middleware("http")
