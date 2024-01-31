@@ -30,6 +30,13 @@ source henv/bin/activate
 pip install Flask SQLAlchemy
 ```
 
+```bash
+pip install python-dotenv
+```
+
+```bash
+pip install psycopg2-bina```
+
 ## Run Docker-compose file
 ```bash
 docker-compose up

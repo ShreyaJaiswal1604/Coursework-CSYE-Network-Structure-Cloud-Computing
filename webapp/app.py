@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from sqlalchemy import create_engine, exc
 from dotenv import load_dotenv
 import os
@@ -9,24 +9,27 @@ load_dotenv()
 app = Flask(__name__)
 
 # Load database connection string from environment variable
-DB_CONN = os.getenv('DB_CONN')
-print("=========================")
-print(DB_CONN)
-print("=========================")
+#DB_CONN = os.getenv('DB_CONN')
+DB_CONN  = "postgresql://sjuser:sjpassword@localhost/sjdatabase"
 
-@app.route('/healthz', methods=['GET'])
+@app.route('/healthz')
+
 def healthCheck():
-    if request.method != 'GET':
-        return jsonify({'error': 'Method Not Allowed'}), 405 
-
+    response = Response()
     if request.data:
-        return jsonify({'error': 'Bad Request'}), 400
+        response.status_code=400
+        return response
+    
+    elif request.method != 'GET':
+        response.status_code=405
+        return response
 
-    try:
-        engine = create_engine(DB_CONN)
-        engine.connect()
-    except exc.OperationalError:
-        return '', 503
+    # try:
+    #     engine = create_engine(DB_CONN)
+    #     engine.connect()
+    # except  Exception as e:
+    #     print(f"e --> {e}")
+    #     return '', 503
 
     response = jsonify({})
     response.headers['Cache-Control'] = 'no-cache'
